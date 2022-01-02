@@ -1,0 +1,26 @@
+{
+  "name": "pet-the-dog",
+  "version": "1.0.0",
+  "description": "Exploratory project to make a 3D application with JavaScript. Will make an application that allows you to pet a 3D dog.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michael-weems/pet-the-dog.git"
+  },
+  "author": "michael weems",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michael-weems/pet-the-dog/issues"
+  },
+  "homepage": "https://github.com/michael-weems/pet-the-dog#readme",
+  "dependencies": {
+    "three": "^0.136.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.135.0"
+  }
+}
