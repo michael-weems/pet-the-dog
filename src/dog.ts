@@ -1,6 +1,5 @@
-import THREE = require('three');
 import {rule3} from './utils';
-
+import * as THREE from 'three';
 export class Dog {
   windTime: number;
   bodyInitPositions: any[];
@@ -132,12 +131,23 @@ export class Dog {
     this.body.position.y = -30;
     this.bodyVertices = [0, 1, 2, 3, 4, 10];
 
-    for (let i = 0; i < this.bodyVertices.length; i++) {
-      const tv = this.body.geometry.vertices[this.bodyVertices[i]];
-      tv.z = 70;
-      //tv.x = 0;
-      this.bodyInitPositions.push({x: tv.x, y: tv.y, z: tv.z});
+    if (this.body.isMesh) {
+      const position = this.body.geometry.attributes.position;
+      const vector = new THREE.Vector3();
+
+      for (let i = 0, l = position.count; i < l; i++) {
+        const tv = vector.fromBufferAttribute(position, i);
+        tv.z = 70;
+        this.bodyInitPositions.push({x: tv.x, y: tv.y, z: tv.z});
+      }
     }
+
+    // for (let i = 0; i < this.bodyVertices.length; i++) {
+    //   const tv = this.body.geometry.vertices[this.bodyVertices[i]];
+    //   tv.z = 70;
+    //   //tv.x = 0;
+    //   this.bodyInitPositions.push({x: tv.x, y: tv.y, z: tv.z});
+    // }
 
     // knee
     this.leftKnee = new THREE.Mesh(kneeGeom, this.yellowMat);
@@ -485,12 +495,23 @@ export class Dog {
       m.rotation.y = 0;
     }
 
+    if (this.body.isMesh) {
+      const position = this.body.geometry.attributes.position;
+      const vector = new THREE.Vector3();
+
+      for (let i = 0, l = position.count; i < l; i++) {
+        const tvInit = this.bodyInitPositions[i];
+
+        const tv = vector.fromBufferAttribute(position, i);
+        tv.x = tvInit.x + this.head.position.x;
+      }
+    }
+
     for (let i = 0; i < this.bodyVertices.length; i++) {
       const tvInit = this.bodyInitPositions[i];
       const tv = this.body.geometry.vertices[this.bodyVertices[i]];
       tv.x = tvInit.x + this.head.position.x;
     }
-    this.body.geometry.verticesNeedUpdate = true;
   }
 
   cool(xTarget: number, yTarget: number) {

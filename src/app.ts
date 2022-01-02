@@ -6,7 +6,7 @@ import {
   Scene,
   WebGLRenderer,
 } from 'three';
-import THREE = require('three');
+import * as THREE from 'three';
 import {Dog} from './dog';
 import {Hand} from './hand';
 
@@ -63,7 +63,7 @@ function init() {
   renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(WIDTH, HEIGHT);
-  renderer.shadowMapEnabled = true;
+  renderer.shadowMap.enabled = true;
   container = document.getElementById('world') as HTMLElement;
   container.appendChild(renderer.domElement);
   windowHalfX = WIDTH / 2;
@@ -86,8 +86,8 @@ function onWindowResize() {
   windowHalfX = WIDTH / 2;
   windowHalfY = HEIGHT / 2;
   renderer.setSize(WIDTH, HEIGHT);
-  //   camera.aspect = WIDTH / HEIGHT;
-  //   camera.updateProjectionMatrix();
+  camera.aspect = WIDTH / HEIGHT;
+  camera.updateProjectionMatrix();
 }
 
 function handleMouseMove(event: {clientX: any; clientY: any}) {

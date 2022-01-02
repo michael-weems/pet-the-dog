@@ -1,4 +1,4 @@
-import THREE = require('three');
+import * as THREE from 'three';
 import {rule3} from './utils';
 
 export class Hand {
