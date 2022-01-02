@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "gts lint",
-    "clean": "gts clean",
+    "lint": "gts lint src",
+    "clean": "gts clean src",
     "compile": "tsc",
-    "fix": "gts fix",
+    "fix": "gts fix src",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run lint",
     "start": "vite",
-    "build": "eslint src --fix && tsc && vite build"
+    "build": "eslint src --fix && vite build"
   },
   "repository": {
     "type": "git",
