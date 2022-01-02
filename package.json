@@ -5,7 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node index.js"
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "start": "vite",
+    "build": "eslint src --fix && tsc && vite build"
   },
   "repository": {
     "type": "git",
@@ -21,11 +29,16 @@
     "three": "^0.136.0"
   },
   "devDependencies": {
+    "@types/node": "^14.11.2",
     "@types/three": "^0.135.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "gts": "^3.1.0",
     "prettier": "^2.5.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.0.3",
+    "vite": "^2.7.10"
   }
 }
