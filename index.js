@@ -1,18 +1,9 @@
-var http = require('http');  
-var fs = require('fs');  
-var server = http.createServer(function(request, response) {  
-    fs.readFile(__dirname + 'index.html', function(error, data) {  
-        if (error) {  
-            response.writeHead(404);  
-            response.write(error);  
-            response.end();  
-        } else {  
-            response.writeHead(200, {  
-                'Content-Type': 'text/html'  
-            });  
-            response.write(data);  
-            response.end();  
-        }  
-    });  
-});  
-server.listen(7000);
+const http = require('http')
+const fs = require('fs')
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'content-type': 'text/html' })
+  fs.createReadStream('index.html').pipe(res)
+})
+
+server.listen(process.env.PORT || 7000)
