@@ -1,8 +1,8 @@
 import {
-  Camera,
   DirectionalLight,
   HemisphereLight,
   Mesh,
+  PerspectiveCamera,
   Scene,
   WebGLRenderer,
 } from 'three';
@@ -14,8 +14,8 @@ import {Hand} from './hand';
  * THREEJS RELATED VARIABLES
  */
 let scene: Scene;
-let camera: Camera;
-//let     controls:
+let camera: PerspectiveCamera;
+let controls: any;
 let fieldOfView: number;
 let aspectRatio: number;
 let nearPlane: number;
@@ -186,7 +186,7 @@ function loop() {
 }
 
 function render() {
-  //   if (controls) controls.update();
+  if (controls) controls.update();
   renderer.render(scene, camera);
 }
 

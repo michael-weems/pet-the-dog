@@ -137,8 +137,7 @@ export class Dog {
 
       for (let i = 0, l = position.count; i < l; i++) {
         const tv = vector.fromBufferAttribute(position, i);
-        tv.z = 70;
-        this.bodyInitPositions.push({x: tv.x, y: tv.y, z: tv.z});
+        this.bodyInitPositions.push({x: tv.x, y: tv.y, z: 70});
       }
     }
 
@@ -506,12 +505,6 @@ export class Dog {
         tv.x = tvInit.x + this.head.position.x;
       }
     }
-
-    for (let i = 0; i < this.bodyVertices.length; i++) {
-      const tvInit = this.bodyInitPositions[i];
-      const tv = this.body.geometry.vertices[this.bodyVertices[i]];
-      tv.x = tvInit.x + this.head.position.x;
-    }
   }
 
   cool(xTarget: number, yTarget: number) {
@@ -581,11 +574,16 @@ export class Dog {
       m.rotation.y = amp + Math.cos(this.windTime + i) * dt * amp;
     }
 
-    for (let i = 0; i < this.bodyVertices.length; i++) {
-      const tvInit = this.bodyInitPositions[i];
-      const tv = this.body.geometry.vertices[this.bodyVertices[i]];
-      tv.x = tvInit.x + this.head.position.x;
+    if (this.body.isMesh) {
+      const position = this.body.geometry.attributes.position;
+      const vector = new THREE.Vector3();
+
+      for (let i = 0, l = position.count; i < l; i++) {
+        const tvInit = this.bodyInitPositions[i];
+        const tv = vector.fromBufferAttribute(position, tvInit);
+        tv.x = tvInit.x + this.head.position.x;
+        this.bodyInitPositions.push({x: tv.x, y: tv.y, z: 70});
+      }
     }
-    this.body.geometry.verticesNeedUpdate = true;
   }
 }
